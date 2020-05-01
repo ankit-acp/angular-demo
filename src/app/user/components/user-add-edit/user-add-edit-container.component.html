@@ -1,0 +1,65 @@
+<!-- <button type="button" (click)="showModalDialog()" pButton icon="pi pi-external-link" label="Show"></button> -->
+<p-dialog position="center" header="User" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
+    autoZIndex="true" closeOnEscape="true" draggable="false" resizable="false">
+
+    <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
+        <div class="modal-body">
+            <div class="modal-form">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <input type="hidden" class="form-control" id="id" formControlName="Id">
+
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" id="name" formControlName="Name" placeholder="Name">
+                            <span style="color:crimson;"
+                                *ngIf="(f.Name.dirty || f.Name.touched) && f.Name.invalid && f.Name.errors && f.Name.errors.required">Name
+                                is required</span>
+                        </div>
+
+                        <div class="form-group col-md-6">
+
+                            <input type="number" class="form-control" id="Salary" formControlName="Salary"
+                                placeholder="Salary">
+                            <span style="color:crimson;"
+                                *ngIf="(f.Salary.dirty || f.Salary.touched) && f.Salary.invalid && f.Salary.errors && f.Salary.errors.required">Salary
+                                is required</span>
+                        </div>
+
+                        <div class="form-group col-md-6">
+
+                            <input type="number" class="form-control" id="age" formControlName="Age" placeholder="Age">
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- 
+                <div>
+                    <button type="submit" pButton icon="pi pi-check" label="Save">Save</button>
+                </div> -->
+
+            </div>
+        </div>
+
+        <div class="col-md-12" style="border-top: 1px solid #c8c8c8;
+        background-color: #ffffff;
+        color: #333333;
+        padding: 0.571em 1em;
+        margin: 0;
+        text-align: right;
+        position: relative;width: 50vw;
+        ">
+            <button type="submit" pButton icon="pi pi-check" label="Save" [disabled]="!registerForm.valid">Save</button>
+            <button type="button" pButton icon="pi pi-times" (click)="displayModal=false" label="Cancel"
+                class="ui-button-secondary">Cancel</button>
+        </div>
+    </form>
+
+    <!-- <p-footer>
+        <button type="submit" pButton icon="pi pi-check" label="Save">Save</button>
+        <button type="button" pButton icon="pi pi-times" (click)="displayModal=false" label="Cancel"
+            class="ui-button-secondary">Cancel</button>
+    </p-footer> -->
+
+</p-dialog>

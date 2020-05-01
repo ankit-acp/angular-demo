@@ -1,0 +1,85 @@
+<h1>Users</h1>
+
+<div class="col-sm-11" style="text-align:right;padding-bottom: 10px;padding-right: 50px;">
+    <button type="button" (click)="showModal(null)" class="btn btn-primary" data-toggle="modal"
+        data-target="#user-modal">
+        Create User
+    </button>
+</div>
+
+<p-table #dt [value]="users" [(selection)]="selectedCustomers" dataKey="id" styleClass="ui-table-customers"
+    [rowHover]="true" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+    [globalFilterFields]="['employee_name','employee_salary','employee_age']">
+    <ng-template pTemplate="caption">
+        List of Users
+        <div class="ui-table-globalfilter-container">
+            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                placeholder="Global Search" />
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <!-- <th></th> -->
+            <th pSortableColumn="employee_name">Name <p-sortIcon field="employee_name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="employee_salary">Salary <p-sortIcon field="employee_salary"></p-sortIcon>
+            </th>
+            <th pSortableColumn="employee_age">Age <p-sortIcon field="employee_age">
+                </p-sortIcon>
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            <!-- <th>
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th> -->
+            <th>
+                <input pInputText type="text" (input)="dt.filter($event.target.value, 'employee_name', 'contains')"
+                    placeholder="Search by Name" class="ui-column-filter">
+            </th>
+            <th>
+                <input pInputText type="text" (input)="dt.filter($event.target.value, 'employee_salary', 'contains')"
+                    placeholder="Search by salary" class="ui-column-filter">
+            </th>
+            <th>
+                <input pInputText type="text" (input)="dt.filter($event.target.value, 'employee_age', 'contains')"
+                    placeholder="Search by age" class="ui-column-filter">
+            </th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-users>
+        <tr class="ui-selectable-row">
+            <!-- <td>
+                <p-tableCheckbox [value]="users"></p-tableCheckbox>
+            </td> -->
+            <td>
+                {{users.employee_name}}
+                <!-- <span class="ui-column-title">Name</span> -->
+            </td>
+            <td>
+                {{users.employee_salary}}
+                <span class="ui-column-title">Salary</span>
+            </td>
+            <td>
+                {{users.employee_age}}
+                <span class="ui-column-title">Age</span>
+            </td>
+            <td>
+                <button type="button" (click)="showModal(users)" class="btn btn-primary" data-toggle="modal"
+                    data-target="#user-modal">
+                    Edit
+                </button>
+
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8" style="text-align:left">No user found.</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<user-add-edit></user-add-edit>
